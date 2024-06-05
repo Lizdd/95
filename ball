@@ -1,0 +1,15 @@
+from moviepy.editor import VideoFileClip, ImageClip, CompositeVideoClip
+from moviepy.video.fx.all import rotate
+
+# Загрузка изображений мяча и ворот
+ball_image = ImageClip('ball.png')
+goal_image = ImageClip('goal.png')
+
+# Создание видеоклипа с мячом, летящим в ворота
+ball_in_goal = CompositeVideoClip([ball_image.set_position('center'), goal_image])
+
+# Добавление анимации мяча, залетающего в ворота
+ball_in_goal_animated = ball_in_goal.fx(rotate, angle=360, drift=0.05, duration=1)
+
+# Сохранение видео
+ball_in_goal_animated.write_videofile('ball_in_goal.mp4')
